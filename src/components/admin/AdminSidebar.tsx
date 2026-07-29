@@ -21,6 +21,16 @@ export function AdminSidebar() {
           Veri Jóias
         </Link>
       </div>
+      <div className="px-6 pb-4">
+        <a
+          href="/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.15em] text-muted border border-border px-3 py-2 hover:border-foreground hover:text-foreground transition-colors"
+        >
+          Ver site do cliente ↗
+        </a>
+      </div>
       <nav className="flex md:flex-col px-3 gap-1">
         {links.map((link) => {
           const active =
