@@ -1,20 +1,36 @@
 import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import type { Produto } from "@/lib/types";
+import type { CategoriaProduto, Produto } from "@/lib/types";
 import { CATEGORIAS } from "@/lib/types";
 import { formatarPreco } from "@/lib/utils";
 import { ButtonLink } from "@/components/ui/Button";
 import { StatusBadge } from "@/components/ui/StatusBadge";
+import { Select } from "@/components/ui/Field";
 import { DeleteProductButton } from "@/components/admin/DeleteProductButton";
 
-export default async function AdminProdutosPage() {
+const CATEGORIAS_VALIDAS = ["aneis", "colares", "brincos", "pulseiras", "outros"];
+
+interface AdminProdutosPageProps {
+  searchParams: Promise<{ categoria?: string }>;
+}
+
+export default async function AdminProdutosPage({
+  searchParams,
+}: AdminProdutosPageProps) {
+  const params = await searchParams;
   const supabase = await createClient();
-  const { data: produtos } = await supabase
+
+  let query = supabase
     .from("produtos")
     .select("*")
-    .order("criado_em", { ascending: false })
-    .returns<Produto[]>();
+    .order("criado_em", { ascending: false });
+
+  if (params.categoria && CATEGORIAS_VALIDAS.includes(params.categoria)) {
+    query = query.eq("categoria", params.categoria as CategoriaProduto);
+  }
+
+  const { data: produtos } = await query.returns<Produto[]>();
 
   return (
     <div>
@@ -22,6 +38,46 @@ export default async function AdminProdutosPage() {
         <h1 className="font-serif text-3xl">Produtos</h1>
         <ButtonLink href="/admin/produtos/novo">Nova peça</ButtonLink>
       </div>
+
+      <form
+        method="get"
+        className="flex flex-wrap items-end gap-4 mb-6 max-w-xs"
+      >
+        <div className="flex-1">
+          <label
+            htmlFor="categoria"
+            className="block text-[11px] uppercase tracking-[0.15em] text-muted mb-2"
+          >
+            Filtrar por categoria
+          </label>
+          <Select
+            id="categoria"
+            name="categoria"
+            defaultValue={params.categoria ?? ""}
+          >
+            <option value="">Todas</option>
+            {CATEGORIAS.map((c) => (
+              <option key={c.value} value={c.value}>
+                {c.label}
+              </option>
+            ))}
+          </Select>
+        </div>
+        <button
+          type="submit"
+          className="px-6 py-3 text-xs uppercase tracking-[0.2em] border border-foreground hover:bg-foreground hover:text-background transition-colors"
+        >
+          Filtrar
+        </button>
+        {params.categoria && (
+          <Link
+            href="/admin/produtos"
+            className="text-xs uppercase tracking-[0.15em] text-muted hover:text-foreground pb-3"
+          >
+            Limpar
+          </Link>
+        )}
+      </form>
 
       <div className="overflow-x-auto border border-border">
         <table className="w-full text-sm">
@@ -79,7 +135,9 @@ export default async function AdminProdutosPage() {
 
         {(!produtos || produtos.length === 0) && (
           <p className="px-4 py-8 text-center text-muted">
-            Nenhuma peça cadastrada ainda.
+            {params.categoria
+              ? "Nenhuma peça encontrada nessa categoria."
+              : "Nenhuma peça cadastrada ainda."}
           </p>
         )}
       </div>

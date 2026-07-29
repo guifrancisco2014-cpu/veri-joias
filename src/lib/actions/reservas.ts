@@ -79,6 +79,6 @@ export async function criarReserva(
   return {
     success: true,
     message:
-      "Reserva registrada com sucesso! Em breve entraremos em contato com você.",
+      "Você será contatado para andamento na compra com infos de pagamento, entrega e etc.\n\nEssa peça já é quase sua.",
   };
 }
