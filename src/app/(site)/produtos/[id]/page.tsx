@@ -46,33 +46,36 @@ export default async function ProdutoPage({ params }: ProdutoPageProps) {
   const categoria = CATEGORIAS.find((c) => c.value === produto.categoria);
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-16">
-      <div className="grid gap-12 md:grid-cols-2">
+    <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
+      <div className="grid gap-14 md:grid-cols-2 md:gap-20">
         <Gallery fotos={produto.fotos} alt={produto.nome} />
 
         <div>
           {categoria && (
-            <p className="text-xs uppercase tracking-[0.3em] text-gold mb-4">
+            <p className="text-[11px] uppercase tracking-[0.3em] text-gold mb-4 font-medium">
               {categoria.label}
             </p>
           )}
-          <h1 className="font-serif text-3xl md:text-4xl">{produto.nome}</h1>
-          <p className="mt-4 text-2xl">{formatarPreco(produto.preco)}</p>
+          <h1 className="font-serif font-normal text-3xl md:text-4xl">
+            {produto.nome}
+          </h1>
+          <p className="mt-4 text-xl text-muted-light font-light">
+            {formatarPreco(produto.preco)}
+          </p>
 
-          <div className="mt-4">
+          <div className="mt-5">
             <StatusBadge status={produto.status} />
           </div>
 
           {produto.descricao && (
-            <p className="mt-8 text-muted leading-relaxed whitespace-pre-line">
+            <p className="mt-8 text-muted font-light leading-relaxed whitespace-pre-line">
               {produto.descricao}
             </p>
           )}
 
           {produto.material && (
-            <p className="mt-6 text-sm">
-              <span className="text-muted">Material: </span>
-              {produto.material}
+            <p className="mt-6 text-xs uppercase tracking-[0.1em] text-muted">
+              Material — {produto.material}
             </p>
           )}
 

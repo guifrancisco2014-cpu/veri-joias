@@ -33,9 +33,11 @@ export function ProductCard({ produto }: { produto: Produto }) {
           </div>
         )}
       </div>
-      <div className={cn("pt-4 text-center", indisponivel && "opacity-60")}>
-        <h3 className="font-serif text-lg">{produto.nome}</h3>
-        <p className="mt-1 text-sm text-muted">{formatarPreco(produto.preco)}</p>
+      <div className={cn("pt-5 text-center", indisponivel && "opacity-60")}>
+        <h3 className="font-serif text-lg font-normal">{produto.nome}</h3>
+        <p className="mt-1.5 text-xs tracking-wide text-muted-light">
+          {formatarPreco(produto.preco)}
+        </p>
       </div>
     </Link>
   );

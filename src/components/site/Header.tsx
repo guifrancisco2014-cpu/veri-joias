@@ -15,19 +15,19 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b border-border">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-        <Link href="/" className="font-serif text-2xl tracking-wide">
+    <header className="sticky top-0 z-40 bg-background border-b border-border">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6 md:py-7">
+        <Link href="/" className="font-serif text-2xl md:text-[26px] tracking-wide">
           Veri Jóias
         </Link>
 
-        <nav className="hidden md:flex items-center gap-10">
+        <nav className="hidden md:flex items-center gap-12">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className={cn(
-                "text-sm uppercase tracking-wide transition-colors hover:text-gold",
+                "text-[11px] uppercase tracking-[0.2em] font-medium transition-colors hover:text-gold",
                 pathname === link.href ? "text-gold" : "text-foreground"
               )}
             >
@@ -72,7 +72,7 @@ export function Header() {
               href={link.href}
               onClick={() => setOpen(false)}
               className={cn(
-                "text-sm uppercase tracking-wide py-2",
+                "text-xs uppercase tracking-[0.2em] py-2",
                 pathname === link.href ? "text-gold" : "text-foreground"
               )}
             >

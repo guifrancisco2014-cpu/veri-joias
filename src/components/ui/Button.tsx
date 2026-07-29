@@ -5,15 +5,18 @@ import type { ButtonHTMLAttributes } from "react";
 type Variant = "primary" | "secondary" | "ghost" | "danger";
 
 const variantClasses: Record<Variant, string> = {
-  primary: "bg-foreground text-background hover:bg-gold",
+  primary:
+    "bg-background text-foreground border border-foreground hover:bg-foreground hover:text-background",
   secondary:
-    "bg-transparent text-foreground border border-foreground hover:bg-foreground hover:text-background",
-  ghost: "bg-transparent text-foreground hover:bg-beige",
-  danger: "bg-transparent text-danger border border-danger hover:bg-danger hover:text-white",
+    "bg-transparent text-foreground border border-border hover:border-foreground",
+  ghost:
+    "bg-transparent text-foreground border-0 underline-offset-4 hover:underline hover:text-gold",
+  danger:
+    "bg-transparent text-danger border border-danger hover:bg-danger hover:text-white",
 };
 
 const baseClasses =
-  "inline-flex items-center justify-center gap-2 px-6 py-3 text-sm tracking-wide uppercase transition-colors duration-200 disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2 px-8 py-3 text-xs tracking-[0.2em] uppercase transition-colors duration-300 disabled:opacity-50 disabled:pointer-events-none";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant;

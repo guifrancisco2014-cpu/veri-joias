@@ -18,7 +18,7 @@ export function Label({
   return (
     <label
       htmlFor={htmlFor}
-      className="block text-xs uppercase tracking-wide text-muted mb-2"
+      className="block text-[11px] uppercase tracking-[0.15em] text-muted mb-2"
     >
       {children}
     </label>

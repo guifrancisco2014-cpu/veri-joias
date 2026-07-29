@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fbf9f6;
+  --background: #ffffff;
   --surface: #ffffff;
-  --foreground: #2a2420;
-  --muted: #7a7169;
-  --border: #e7ded0;
-  --gold: #b28a4f;
-  --gold-soft: #d8c39f;
-  --rose: #d9b8ae;
-  --beige: #ede6da;
+  --foreground: #191919;
+  --muted: #6b6b68;
+  --muted-light: #9a9a96;
+  --border: #e2e0da;
+  --border-strong: #191919;
+  --gold: #9c7f4f;
+  --gold-soft: #cbb98e;
+  --beige: #f4f2ee;
   --danger: #a3453b;
   --success: #4a7c59;
 }
@@ -19,26 +20,34 @@
   --color-surface: var(--surface);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-muted-light: var(--muted-light);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
-  --color-rose: var(--rose);
   --color-beige: var(--beige);
   --color-danger: var(--danger);
   --color-success: var(--success);
-  --font-serif: var(--font-playfair);
-  --font-sans: var(--font-manrope);
+  --font-serif: var(--font-cormorant);
+  --font-sans: var(--font-inter);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4,
 .font-serif {
   font-family: var(--font-serif), Georgia, serif;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.tracking-label {
+  letter-spacing: 0.18em;
 }
 
 ::selection {

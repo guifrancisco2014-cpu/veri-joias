@@ -48,12 +48,12 @@ export default async function CatalogoPage({ searchParams }: CatalogoPageProps) 
   const { data: produtos } = await query.returns<Produto[]>();
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-16">
-      <div className="text-center mb-12">
-        <p className="text-xs uppercase tracking-[0.3em] text-gold mb-4">
+    <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <div className="text-center mb-16">
+        <p className="text-[11px] uppercase tracking-[0.3em] text-gold mb-4 font-medium">
           Coleção completa
         </p>
-        <h1 className="font-serif text-4xl">Catálogo</h1>
+        <h1 className="font-serif font-normal text-4xl md:text-5xl">Catálogo</h1>
       </div>
 
       <Filters filters={params} />
