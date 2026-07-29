@@ -1,5 +1,5 @@
 import { ButtonLink } from "@/components/ui/Button";
-import { ProductGrid } from "@/components/site/ProductGrid";
+import { FeaturedCarousel } from "@/components/site/FeaturedCarousel";
 import { createClient } from "@/lib/supabase/server";
 import type { Produto } from "@/lib/types";
 
@@ -10,7 +10,7 @@ export default async function HomePage() {
     .select("*")
     .eq("destaque", true)
     .order("criado_em", { ascending: false })
-    .limit(8)
+    .limit(12)
     .returns<Produto[]>();
 
   return (
@@ -41,7 +41,7 @@ export default async function HomePage() {
               Em destaque
             </h2>
           </div>
-          <ProductGrid produtos={destaques} />
+          <FeaturedCarousel produtos={destaques} />
         </section>
       )}
     </div>
