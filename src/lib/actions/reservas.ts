@@ -79,6 +79,6 @@ export async function criarReserva(
   return {
     success: true,
     message:
-      "Você será contatado para andamento na compra com infos de pagamento, entrega e etc.\n\nEssa peça já é quase sua.",
+      "✨ Essa peça já é quase sua! ✨\n\nAo reservar, você será contatada para darmos continuidade à sua compra e combinarmos todos os detalhes, como forma de pagamento, entrega e demais informações.\n\n💖 Obrigada por escolher a nossa loja!",
   };
 }

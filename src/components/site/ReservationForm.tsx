@@ -14,16 +14,19 @@ export function ReservationForm({ produtoId }: { produtoId: string }) {
   );
 
   if (state.success) {
-    const [info, destaque] = state.message.split("\n\n");
+    const [titulo, corpo, agradecimento] = state.message.split("\n\n");
     return (
       <div className="border border-foreground px-6 py-8 text-center">
-        {info && (
-          <p className="text-sm text-muted font-light leading-relaxed">
-            {info}
+        {titulo && (
+          <p className="font-serif text-xl text-gold">{titulo}</p>
+        )}
+        {corpo && (
+          <p className="mt-4 text-sm text-muted font-light leading-relaxed">
+            {corpo}
           </p>
         )}
-        {destaque && (
-          <p className="font-serif text-xl text-gold mt-4">{destaque}</p>
+        {agradecimento && (
+          <p className="mt-4 text-sm text-foreground">{agradecimento}</p>
         )}
       </div>
     );
