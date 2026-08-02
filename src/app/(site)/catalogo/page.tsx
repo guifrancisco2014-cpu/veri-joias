@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
 import { ProductGrid } from "@/components/site/ProductGrid";
 import { Filters } from "@/components/site/Filters";
+import { CategoryShowcase } from "@/components/site/CategoryShowcase";
 import type { CategoriaProduto, Produto, StatusProduto } from "@/lib/types";
 
 export const metadata: Metadata = {
@@ -56,7 +57,9 @@ export default async function CatalogoPage({ searchParams }: CatalogoPageProps) 
         <h1 className="font-serif font-normal text-4xl md:text-5xl">Catálogo</h1>
       </div>
 
-      <Filters filters={params} />
+      <CategoryShowcase categoriaAtiva={params.categoria} />
+
+      <Filters key={JSON.stringify(params)} filters={params} />
       <ProductGrid produtos={produtos ?? []} />
     </div>
   );
