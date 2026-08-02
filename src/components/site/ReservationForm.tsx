@@ -1,9 +1,10 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { criarReserva, type ReservaFormState } from "@/lib/actions/reservas";
 import { Button } from "@/components/ui/Button";
 import { Input, Label, Textarea } from "@/components/ui/Field";
+import { formatarContato } from "@/lib/utils";
 
 const initialState: ReservaFormState = { success: false, message: "" };
 
@@ -12,6 +13,7 @@ export function ReservationForm({ produtoId }: { produtoId: string }) {
     criarReserva,
     initialState
   );
+  const [contato, setContato] = useState("");
 
   if (state.success) {
     const [titulo, corpo, agradecimento] = state.message.split("\n\n");
@@ -43,7 +45,16 @@ export function ReservationForm({ produtoId }: { produtoId: string }) {
 
       <div>
         <Label htmlFor="contato">Telefone ou e-mail</Label>
-        <Input id="contato" name="contato" required autoComplete="tel" />
+        <Input
+          id="contato"
+          name="contato"
+          required
+          autoComplete="tel"
+          inputMode="text"
+          placeholder="(11) 91234-5678 ou seuemail@exemplo.com"
+          value={contato}
+          onChange={(e) => setContato(formatarContato(e.target.value))}
+        />
       </div>
 
       <div>

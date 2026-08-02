@@ -5,10 +5,20 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { notificarNovaReserva } from "@/lib/email";
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const reservaSchema = z.object({
   produtoId: z.string().uuid(),
   nome: z.string().trim().min(2, "Informe seu nome completo"),
-  contato: z.string().trim().min(8, "Informe um telefone ou e-mail válido"),
+  contato: z
+    .string()
+    .trim()
+    .min(8, "Informe um telefone ou e-mail válido")
+    .refine((valor) => {
+      if (EMAIL_REGEX.test(valor)) return true;
+      const digitos = valor.replace(/\D/g, "");
+      return digitos.length === 10 || digitos.length === 11;
+    }, "Informe um telefone válido (com DDD) ou um e-mail válido"),
   mensagem: z.string().trim().max(500).optional(),
 });
 
