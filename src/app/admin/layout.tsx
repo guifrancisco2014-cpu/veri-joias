@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: {
     default: "Painel administrativo",
-    template: "%s | Painel Veri Jóias",
+    template: "%s | Painel Íria Semijoias",
   },
   robots: { index: false, follow: false },
 };

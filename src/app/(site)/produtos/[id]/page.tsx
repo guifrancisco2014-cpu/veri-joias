@@ -32,7 +32,7 @@ export async function generateMetadata({
 
   return {
     title: produto.nome,
-    description: produto.descricao || `${produto.nome} — Veri Jóias`,
+    description: produto.descricao || `${produto.nome} — Íria Semijoias`,
     openGraph: produto.fotos[0] ? { images: [produto.fotos[0]] } : undefined,
   };
 }

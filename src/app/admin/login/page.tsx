@@ -4,6 +4,7 @@ import { useActionState } from "react";
 import { login, type LoginFormState } from "@/lib/actions/auth";
 import { Button } from "@/components/ui/Button";
 import { Input, Label } from "@/components/ui/Field";
+import { Logotype } from "@/components/ui/Logotype";
 
 const initialState: LoginFormState = { message: "" };
 
@@ -13,7 +14,9 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center px-6">
       <div className="w-full max-w-sm">
-        <h1 className="font-serif text-3xl text-center mb-2">Veri Jóias</h1>
+        <div className="flex justify-center mb-6">
+          <Logotype size="lg" />
+        </div>
         <p className="text-center text-sm text-muted mb-10">
           Acesso ao painel administrativo
         </p>

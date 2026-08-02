@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { logout } from "@/lib/actions/auth";
 import { cn } from "@/lib/utils";
+import { Logotype } from "@/components/ui/Logotype";
 
 const links = [
   { href: "/admin", label: "Dashboard" },
@@ -17,8 +18,8 @@ export function AdminSidebar() {
   return (
     <aside className="w-full md:w-56 md:min-h-screen border-b md:border-b-0 md:border-r border-border bg-surface">
       <div className="px-6 py-6">
-        <Link href="/admin" className="font-serif text-xl">
-          Veri Jóias
+        <Link href="/admin">
+          <Logotype size="sm" />
         </Link>
       </div>
       <div className="px-6 pb-4">

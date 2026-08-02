@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { Logotype } from "@/components/ui/Logotype";
 
 const links = [
   { href: "/", label: "Início" },
@@ -16,9 +17,9 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 bg-background border-b border-border">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6 md:py-7">
-        <Link href="/" className="font-serif text-2xl md:text-[26px] tracking-wide">
-          Veri Jóias
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+        <Link href="/" aria-label="Íria Semijoias — início">
+          <Logotype size="sm" />
         </Link>
 
         <nav className="hidden md:flex items-center gap-12">
