@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Input, Label, Textarea } from "@/components/ui/Field";
 import { formatarContato } from "@/lib/utils";
 
-const initialState: ReservaFormState = { success: false, message: "" };
+const initialState: ReservaFormState = { message: "" };
 
 export function ReservationForm({ produtoId }: { produtoId: string }) {
   const [state, formAction, isPending] = useActionState(
@@ -14,25 +14,6 @@ export function ReservationForm({ produtoId }: { produtoId: string }) {
     initialState
   );
   const [contato, setContato] = useState("");
-
-  if (state.success) {
-    const [titulo, corpo, agradecimento] = state.message.split("\n\n");
-    return (
-      <div className="border border-foreground px-6 py-8 text-center">
-        {titulo && (
-          <p className="font-serif text-xl text-gold">{titulo}</p>
-        )}
-        {corpo && (
-          <p className="mt-4 text-sm text-muted font-light leading-relaxed">
-            {corpo}
-          </p>
-        )}
-        {agradecimento && (
-          <p className="mt-4 text-sm text-foreground">{agradecimento}</p>
-        )}
-      </div>
-    );
-  }
 
   return (
     <form action={formAction} className="space-y-4">
@@ -62,7 +43,7 @@ export function ReservationForm({ produtoId }: { produtoId: string }) {
         <Textarea id="mensagem" name="mensagem" rows={3} />
       </div>
 
-      {state.message && !state.success && (
+      {state.message && (
         <p className="text-sm text-danger">{state.message}</p>
       )}
 

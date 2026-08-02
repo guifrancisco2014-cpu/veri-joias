@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { notificarNovaReserva } from "@/lib/email";
 
@@ -23,7 +24,6 @@ const reservaSchema = z.object({
 });
 
 export type ReservaFormState = {
-  success: boolean;
   message: string;
 };
 
@@ -40,7 +40,6 @@ export async function criarReserva(
 
   if (!parsed.success) {
     return {
-      success: false,
       message: parsed.error.issues[0]?.message ?? "Dados inválidos.",
     };
   }
@@ -59,7 +58,6 @@ export async function criarReserva(
 
   if (error || !reserva) {
     return {
-      success: false,
       message:
         error?.message === "Esta peça não está mais disponível para reserva"
           ? "Essa peça acabou de ser reservada por outra pessoa. Que tal ver outras opções no catálogo?"
@@ -86,9 +84,9 @@ export async function criarReserva(
   revalidatePath("/catalogo");
   revalidatePath("/");
 
-  return {
-    success: true,
-    message:
-      "✨ Essa peça já é quase sua! ✨\n\nAo reservar, você será contatada para darmos continuidade à sua compra e combinarmos todos os detalhes, como forma de pagamento, entrega e demais informações.\n\n💖 Obrigada por escolher a nossa loja!",
-  };
+  // Redireciona (em vez de só devolver estado) para que a confirmação
+  // sobreviva a um recarregamento da página — se ficasse só em estado
+  // local do React, um refresh acidental faria a pessoa ver a mensagem
+  // genérica de "peça reservada" em vez do agradecimento.
+  redirect(`/produtos/${produtoId}?reservado=1`);
 }

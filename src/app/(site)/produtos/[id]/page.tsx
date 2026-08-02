@@ -10,6 +10,7 @@ import { ReservationForm } from "@/components/site/ReservationForm";
 
 interface ProdutoPageProps {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ reservado?: string }>;
 }
 
 async function getProduto(id: string) {
@@ -37,11 +38,17 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProdutoPage({ params }: ProdutoPageProps) {
+export default async function ProdutoPage({
+  params,
+  searchParams,
+}: ProdutoPageProps) {
   const { id } = await params;
+  const { reservado } = await searchParams;
   const produto = await getProduto(id);
 
   if (!produto) notFound();
+
+  const mostrarConfirmacao = reservado === "1" && produto.status === "reservado";
 
   const categoria = CATEGORIAS.find((c) => c.value === produto.categoria);
 
@@ -80,7 +87,21 @@ export default async function ProdutoPage({ params }: ProdutoPageProps) {
           )}
 
           <div className="mt-10 border-t border-border pt-8">
-            {produto.status === "disponivel" ? (
+            {mostrarConfirmacao ? (
+              <div className="border border-foreground px-6 py-8 text-center">
+                <p className="font-serif text-xl text-gold">
+                  ✨ Essa peça já é quase sua! ✨
+                </p>
+                <p className="mt-4 text-sm text-muted font-light leading-relaxed">
+                  Ao reservar, você será contatada para darmos continuidade à
+                  sua compra e combinarmos todos os detalhes, como forma de
+                  pagamento, entrega e demais informações.
+                </p>
+                <p className="mt-4 text-sm text-foreground">
+                  💖 Obrigada por escolher a nossa loja!
+                </p>
+              </div>
+            ) : produto.status === "disponivel" ? (
               <ReservationForm produtoId={produto.id} />
             ) : (
               <p className="text-sm text-muted">
