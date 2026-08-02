@@ -3,7 +3,7 @@ import { Logotype } from "@/components/ui/Logotype";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border mt-32">
+    <footer className="border-t border-border">
       <div className="mx-auto max-w-6xl px-6 py-16 flex flex-col items-center gap-4 text-center">
         <Logotype size="md" />
         <p className="text-sm text-muted-light max-w-md font-light leading-relaxed mt-2">

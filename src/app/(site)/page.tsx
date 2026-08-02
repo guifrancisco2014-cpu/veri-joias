@@ -32,7 +32,7 @@ export default async function HomePage() {
       </section>
 
       {destaques && destaques.length > 0 && (
-        <section className="mx-auto max-w-6xl px-6 pb-28">
+        <section className="mx-auto max-w-6xl px-6 pb-20">
           <div className="text-center mb-16">
             <p className="text-[11px] uppercase tracking-[0.3em] text-gold mb-4 font-medium">
               Selecionadas para você
