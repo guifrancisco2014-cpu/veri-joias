@@ -20,11 +20,10 @@ export default async function HomePage() {
           Coleção exclusiva
         </p>
         <h1 className="font-serif font-normal text-5xl md:text-7xl leading-[1.1] max-w-3xl mx-auto">
-          Joias que contam a sua história
+          Delicadeza que revela quem você é.
         </h1>
         <p className="mt-8 text-muted-light font-light max-w-xl mx-auto leading-relaxed">
-          Peças únicas, escolhidas a dedo. Explore nossa vitrine e reserve a
-          joia que mais combina com você.
+          Explore o catálogo e reserve a joia que mais combina com você.
         </p>
         <div className="mt-12">
           <ButtonLink href="/catalogo">Ver catálogo</ButtonLink>
